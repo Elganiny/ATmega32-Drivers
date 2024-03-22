@@ -1,8 +1,9 @@
-/***********************************/
-/*    Author: Mohammed Aljanayni   */
-/*    Layer:  MCAL                 */
-/*    Version: 2.00                */
-/***********************************/
+/****************************************************************/
+/*    Author:  Mohammed Aljanayni                               */
+/*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
+/*    SWC:     Component: Digital I/O (DIO)                     */
+/*    Version: 2.10                                             */
+/****************************************************************/
 
 #include "DIO_interface.h"
 
