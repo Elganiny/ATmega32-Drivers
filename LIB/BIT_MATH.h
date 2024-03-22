@@ -1,3 +1,11 @@
+/****************************************************************/
+/*    Author:  Mohammed Aljanayni                               */
+/*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
+/*    SWC:     BIT_MATH                                         */
+/*    Version: 2.10                                             */
+/****************************************************************/
+
+
 #ifndef BIT_MATH_H_
 #define BIT_MATH_H_
 

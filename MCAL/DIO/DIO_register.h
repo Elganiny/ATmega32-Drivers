@@ -1,7 +1,7 @@
 /****************************************************************/
 /*    Author:  Mohammed Aljanayni                               */
 /*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
-/*    SWC:     Component: Digital I/O (DIO)                     */
+/*    SWC:     Digital I/O (DIO)                                */
 /*    Version: 2.10                                             */
 /****************************************************************/
 

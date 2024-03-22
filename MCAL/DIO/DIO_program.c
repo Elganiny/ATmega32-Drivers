@@ -1,7 +1,7 @@
 /****************************************************************/
 /*    Author:  Mohammed Aljanayni                               */
 /*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
-/*    SWC:     Component: Digital I/O (DIO)                     */
+/*    SWC:     Digital I/O (DIO)                                */
 /*    Version: 2.10                                             */
 /****************************************************************/
 
@@ -11,9 +11,9 @@ u8 DIO_u8SetPinDirection(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Direction)
 {
 	u8 Local_u8ErrorState=0;
 
-	if(Copy_u8Pin<= DIO_u8PIN7)
+	if(Copy_u8Pin <= DIO_u8PIN7)
 	{
-		if(Copy_u8Direction==DIO_u8PIN_INPUT)
+		if(Copy_u8Direction == DIO_u8PIN_INPUT)
 		{
 			switch(Copy_u8Port)
 			{
@@ -24,7 +24,7 @@ u8 DIO_u8SetPinDirection(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Direction)
 			default: Local_u8ErrorState=1; break;
 			}
 		}
-		else if (Copy_u8Direction==DIO_u8PIN_OUTPUT)
+		else if (Copy_u8Direction == DIO_u8PIN_OUTPUT)
 		{
 			switch(Copy_u8Port)
 			{
