@@ -1,20 +1,9 @@
-/******************************************************************************
- *
- * Author: Mohammed Ammar
- *
- * Layer: HAL (Hardware Abstraction Layer)
- *
- * SWC: LED (Light Emitting Diode)
- *
- * Version: 1.0
- *
- * Description:
- *   This header file serves as a bridge between the LED module and the lower-level
- *   hardware abstraction layer. It includes necessary configurations and defines
- *   to establish communication with the LED hardware. Welcome to the world of light
- *   manipulation through LED control!
- *
- ******************************************************************************/
+/****************************************************************/
+/*    Author:  Mohammed Aljanayni                               */
+/*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
+/*    SWC:     LED (Light Emitting Diode)                       */
+/*    Version: 2.10                                             */
+/****************************************************************/
 
 #ifndef LED_CONFIGRATION_H
 #define LED_CONFIGRATION_H

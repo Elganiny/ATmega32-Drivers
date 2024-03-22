@@ -1,17 +1,9 @@
-/******************************************************************************
-*
-* Author: Mohammed Ammar
-*
-* Layer: HAL
-*
-* SWC: LED
-*
-* Version: 1.0
-*
-* Description: This code provides functions for turning on and off an LED
-*              based on the connection type (source or sink) through an LED module.
-*
-*******************************************************************************/
+/****************************************************************/
+/*    Author:  Mohammed Aljanayni                               */
+/*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
+/*    SWC:     LED (Light Emitting Diode)                       */
+/*    Version: 2.10                                             */
+/****************************************************************/
 
 #include "LED_interface.h"  // Include necessary definitions
 
