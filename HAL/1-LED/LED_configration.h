@@ -1,6 +1,6 @@
 /****************************************************************/
 /*    Author:  Mohammed Aljanayni                               */
-/*    Layer:   Microcontroller Abstraction Layer (MCAL)         */
+/*    Layer:   HAL (Hardware Abstraction Layer)                 */
 /*    SWC:     LED (Light Emitting Diode)                       */
 /*    Version: 2.10                                             */
 /****************************************************************/
