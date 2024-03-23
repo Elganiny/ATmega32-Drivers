@@ -1,20 +1,4 @@
-/******************************************************************************
- *
- * Author: Mohammed Ammar
- *
- * Layer: HAL (Hardware Abstraction Layer)
- *
- * SWC:LCD
- *
- * Version: 1.0
- *
- * Description:
- *   This header file serves as a bridge between the 7SEGMENT module and the lower-level
- *   hardware abstraction layer. It includes necessary configurations and defines
- *   to establish communication with the 7SEGMENT hardware. This module is designed to
- *   interface with 7-segment displays for numeric display purposes.
- *
- ******************************************************************************/
+
 
 #ifndef INTERFACE_H
 #define INTERFACE_H
