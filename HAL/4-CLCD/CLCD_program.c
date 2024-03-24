@@ -7,7 +7,7 @@
 /*========================== Libraries Includes ==========================*/
 
 #include "../../Lib/Std_Types.h"
-#include "../../MCAL/1-DIO/DIO_interface.h"
+#include "../../MCAL/DIO/DIO_interface.h"
 #include "CLCD_private.h"
 #include "CLCD_config.h"
 #include "CLCD_interface.h"
