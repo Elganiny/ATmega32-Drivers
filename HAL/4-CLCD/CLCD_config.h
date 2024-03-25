@@ -5,7 +5,7 @@
 /*    Version: 2.00                                             */
 /****************************************************************/
 
-/* Include guard */
+/* Include Guards */
 #ifndef CLCD_CONFIG_H
 #define CLCD_CONFIG_H
 
@@ -35,11 +35,11 @@
 
 /* Control Port */
 #define CLCD_CTRL_PORT      DIO_u8PORTD
-#define CLCD_RS_PIN         PIN_0
-#define CLCD_RW_PIN         PIN_1
-#define CLCD_EN_PIN         PIN_2
+#define CLCD_RS_PIN         DIO_u8PIN0
+#define CLCD_RW_PIN         DIO_u8PIN1
+#define CLCD_EN_PIN         DIO_u8PIN2
 
 /* Data Port */
-#define CLCD_DATA_PORT      DIO_u8PORTD
+#define CLCD_DATA_PORT      DIO_u8PORTC
 
 #endif /* CLCD_CONFIG_H */

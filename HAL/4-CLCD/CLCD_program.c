@@ -17,12 +17,12 @@
 void CLCD_VidInit(void)
 {
     /* Make LCD data port direction as O/P */
-    DIO_VidSetPortMode(CLCD_DATA_PORT, PORT_OUTPUT);
+    DIO_u8SetPortDirection(CLCD_DATA_PORT, DIO_u8PORT_OUTPUT);
 
     /* Make LCD ctrl port direction as O/P */
-    DIO_VidSetPinMode(CLCD_CTRL_PORT, PIN_0, OUTPUT);
-    DIO_VidSetPinMode(CLCD_CTRL_PORT, PIN_1, OUTPUT);
-    DIO_VidSetPinMode(CLCD_CTRL_PORT, PIN_2, OUTPUT);
+    DIO_u8SetPinDirection(CLCD_CTRL_PORT, CLCD_RS_PIN, DIO_u8PIN_OUTPUT);
+    DIO_u8SetPinDirection(CLCD_CTRL_PORT, CLCD_RW_PIN, DIO_u8PIN_OUTPUT);
+    DIO_u8SetPinDirection(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_OUTPUT);
 
     /* Delay */
     delay_ms(40);
@@ -30,18 +30,18 @@ void CLCD_VidInit(void)
     /* Switching to 4-bit mode */
     if (CLCD_MODE == CLCD_4BIT)
     {
-        CLCD_VidSendCommand(0x33);
-        CLCD_VidSendCommand(0x32);
+        CLCD_u8SendCommand(0x33);
+        CLCD_u8SendCommand(0x32);
     }
 
     /* Function Set */
-    CLCD_VidSendCommand(CLCD_INIT_FUNCTION_SET);
+    CLCD_u8SendCommand(CLCD_INIT_FUNCTION_SET);
 
     /* Delay */
     delay_us(49);
 
     /* Display ON/OFF Control */
-    CLCD_VidSendCommand(CLCD_INIT_DISPLAY_CONTROL);
+    CLCD_u8SendCommand(CLCD_INIT_DISPLAY_CONTROL);
 
     /* Delay */
     delay_us(49);
@@ -56,62 +56,62 @@ void CLCD_VidInit(void)
 u8 CLCD_u8SendCommand(u8 Copy_u8Command)
 {
     /* Local Variable to hold the Error State */
-    u8 Local_u8ErrorState = STATUS_OK;
+    u8 Local_u8ErrorState = OK;
 
-#if (CLCD_u8_MODE == CLCD_4BIT)
+#if (CLCD_MODE == CLCD_4BIT)
     /* Set RS pin as LOW */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, DIO_u8PIN_LOW);
 
     /* Set RW pin as LOW to write */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, DIO_u8PIN_LOW);
 
     /* Send higher nipple */
-    Local_u8ErrorState = DIO_VidSetPortValue(CLCD_DATA_PORT, (Copy_u8Command & 0xF0));
+    Local_u8ErrorState = DIO_u8SetPortValue(CLCD_DATA_PORT, (Copy_u8Command & 0xF0));
 
     /* Set Enable pin */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, HIGH);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_HIGH);
 
     /* Delay */
     delay_ms(2);
 
     /* Clearing Enable pin */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_LOW);
 
     /* Delay */
     delay_us(200);
 
     /* Send lower nipple */
-    Local_u8ErrorState = DIO_VidSetPortValue(CLCD_DATA_PORT, ((Copy_u8Command << 4) & 0xF0));
+    Local_u8ErrorState = DIO_u8SetPortValue(CLCD_DATA_PORT, ((Copy_u8Command << 4) & 0xF0));
 
     /* Set Enable pin */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, HIGH);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_HIGH);
 
     /* Delay */
     delay_ms(2);
 
     /* Clearing Enable pin */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_LOW);
 #endif
 
-#if (CLCD_u8_MODE == CLCD_u8_8BIT)
+#if (CLCD_MODE == CLCD_8BIT)
 
     /* Set RS pin as LOW */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, DIO_u8PIN_LOW);
 
     /* Set RW pin as LOW to write */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, DIO_u8PIN_LOW);
 
     /* Send command to data port (pins 0 - 7) */
-    Local_u8ErrorState = DIO_VidSetPortValue(CLCD_DATA_PORT, Copy_u8Command);
+    Local_u8ErrorState = DIO_u8SetPortValue(CLCD_DATA_PORT, Copy_u8Command);
 
     /* Set Enable pin */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, HIGH);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_HIGH);
 
     /* Delay */
     delay_ms(2);
 
     /* Clearing Enable pin */
-    Local_u8ErrorState = DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, LOW);
+    Local_u8ErrorState = DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_LOW);
 #endif
 
     /* return Error State */
@@ -121,67 +121,67 @@ u8 CLCD_u8SendCommand(u8 Copy_u8Command)
 u8 CLCD_u8SendData(u8 Copy_u8Data)
 {
     /* Local Variable to hold the Error State */
-    u8 Local_u8ErrorState = STATUS_OK;
+    u8 Local_u8ErrorState = OK;
 
 #if (CLCD_MODE == CLCD_4BIT)
     /* Send higher nipple */
-    DIO_VidSetPortValue(CLCD_DATA_PORT, Copy_u8Data & 0xF0);
+    DIO_u8SetPortValue(CLCD_DATA_PORT, Copy_u8Data & 0xF0);
 
     /* Set RS pin as HIGH */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, HIGH);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, DIO_u8PIN_HIGH);
 
     /* Set RW pin as LOW to write */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, LOW);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, DIO_u8PIN_LOW);
 
     /* Set Enable pin */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, HIGH);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_HIGH);
 
     /* Delay */
     delay_ms(2);
 
     /* Clearing Enable pin */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, LOW);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_LOW);
 
     /* Delay */
     delay_us(200);
 
     /* Send lower nipple */
-    DIO_VidSetPortValue(CLCD_DATA_PORT, (Copy_u8Data << 4) & 0xF0);
+    DIO_u8SetPortValue(CLCD_DATA_PORT, (Copy_u8Data << 4) & 0xF0);
 
     /* Set RS pin as HIGH */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, HIGH);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, DIO_u8PIN_HIGH);
 
     /* Set RW pin as LOW to write */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, LOW);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, DIO_u8PIN_LOW);
 
     /* Set Enable pin */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, HIGH);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_HIGH);
 
     /* Delay */
     delay_ms(2);
 
     /* Clearing Enable pin */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, LOW);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_LOW);
 #endif
 
 #if (CLCD_MODE == CLCD_8BIT)
     /* Set RS pin as HIGH */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, HIGH);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RS_PIN, DIO_u8PIN_HIGH);
 
     /* Set RW pin as LOW to write */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, LOW);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_RW_PIN, DIO_u8PIN_LOW);
 
     /* Send command to data port (pins 0 - 7) */
-    DIO_VidSetPortValue(CLCD_DATA_PORT, Copy_u8Data);
+    DIO_u8SetPortValue(CLCD_DATA_PORT, Copy_u8Data);
 
     /* Set Enable pin */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, HIGH);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_HIGH);
 
     /* Delay */
     delay_ms(2);
 
     /* Clearing Enable pin */
-    DIO_VidSetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, LOW);
+    DIO_u8SetPinValue(CLCD_CTRL_PORT, CLCD_EN_PIN, DIO_u8PIN_LOW);
 #endif
 
     /* return Error State */
@@ -190,7 +190,7 @@ u8 CLCD_u8SendData(u8 Copy_u8Data)
 
 void CLCD_VidDisplayClear(void)
 {
-    CLCD_VidSendCommand(0b00000001);
+    CLCD_u8SendCommand(0b00000001);
     /* Delay */
     delay_ms(2);
 }
@@ -213,13 +213,13 @@ void CLCD_VidGotoXY(u8 Copy_u8XPos, u8 Copy_u8YPos)
 
     /* Send this address to the DDram  128 + Local_u8Address because of the 1st in bit 7 of datasheet */
 
-    CLCD_VidSendCommand(0b010000000 + Local_u8Address);
+    CLCD_u8SendCommand(0b010000000 + Local_u8Address);
 }
 
 u8 CLCD_u8CreatSpecialChar(u8 *Copy_u8Pattern, u8 Copy_u8PatternNumber)
 {
     /* Local Variable to hold the Error State */
-    u8 Local_u8ErrorState = STATUS_OK;
+    u8 Local_u8ErrorState = OK;
 
     /* Local Variable to hold the CGRAM Address */
     u8 Local_u8CGRAMAddress = 0;
@@ -228,12 +228,12 @@ u8 CLCD_u8CreatSpecialChar(u8 *Copy_u8Pattern, u8 Copy_u8PatternNumber)
     Local_u8CGRAMAddress = Copy_u8PatternNumber * 8;
 
     /* Send CGRAM address command to LCD with setting bit 6 to 1 -----> 64 */
-    CLCD_VidSendCommand(Local_u8CGRAMAddress + 64);
+    CLCD_u8SendCommand(Local_u8CGRAMAddress + 64);
 
     /* Write pattern into CGRAM */
     for (u8 i = 0; i < 8; i++)
     {
-        CLCD_VidSendData(Copy_u8Pattern[i]);
+        CLCD_u8SendData(Copy_u8Pattern[i]);
     }
 
     /* return Error State */
@@ -243,11 +243,11 @@ u8 CLCD_u8CreatSpecialChar(u8 *Copy_u8Pattern, u8 Copy_u8PatternNumber)
 u8 CLCD_u8SendString(u8 *Copy_u8Str)
 {
     /* Local Variable to hold the Error State */
-    u8 Local_u8ErrorState = STATUS_OK;
+    u8 Local_u8ErrorState = OK;
 
     while (*Copy_u8Str != '\0')
     {
-        Local_u8ErrorState = CLCD_VidSendData(*Copy_u8Str);
+        Local_u8ErrorState = CLCD_u8SendData(*Copy_u8Str);
         Copy_u8Str++;
     }
 
